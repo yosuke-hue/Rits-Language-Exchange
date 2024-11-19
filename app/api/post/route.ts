@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 import prisma from "../../../lib/prismaClient";
 
-export async function GET(req: Request) {
+export async function GET() {
     const allBBSPosts = await prisma.post.findMany();
     return NextResponse.json(allBBSPosts);
 };
 
-export async function POST(req: Request) {
-    const { username, title, content } = await req.json();
+export async function POST(request: Request) {
+    const { username, title, content } = await request.json();
 
     const post = await prisma.post.create({
         data: {
